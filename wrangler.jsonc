@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "human-project",
+  "compatibility_date": "2026-09-18",
+
+  // Sin "main": no hay Worker todavía, solo archivos estáticos.
+  // El Worker llegará en la semana 2, para firmar las URLs de R2.
+  "assets": {
+    "directory": "./dist/human-project/browser",
+    // Si la ruta no existe como archivo, devuelve index.html
+    // y deja que el router de Angular decida.
+    "not_found_handling": "single-page-application"
+  }
+}

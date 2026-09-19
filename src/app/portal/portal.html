@@ -1,0 +1,11 @@
+<main class="portal">
+  <header class="portal__header">
+    <h1>{{ brand().name }}</h1>
+  </header>
+
+  @for (block of blocks(); track block.id) {
+    @if (componentFor(block.type); as cmp) {
+      <ng-container *ngComponentOutlet="cmp; inputs: inputsFor(block)" />
+    }
+  }
+</main>

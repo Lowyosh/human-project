@@ -1,0 +1,22 @@
+<section class="palette">
+  <h2 class="palette__title">Colores</h2>
+
+  <ul class="palette__list">
+    @for (color of payload().colors; track color.hex) {
+      <li class="swatch">
+        <div class="swatch__sample" [style.background-color]="color.hex"></div>
+
+        <div class="swatch__info">
+          <p class="swatch__name">{{ color.name }}</p>
+          <p class="swatch__hex">{{ color.hex }}</p>
+          <p class="swatch__meta">
+            {{ color.role }}
+            @if (color.usage) {
+              · {{ color.usage }}%
+            }
+          </p>
+        </div>
+      </li>
+    }
+  </ul>
+</section>
