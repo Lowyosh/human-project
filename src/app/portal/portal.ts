@@ -1,8 +1,8 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
-import { Block, BlockType, Brand } from '../blocks/block.types';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { Block, BlockType } from '../blocks/block.types';
 import { REGISTRY } from '../blocks/registry';
-import seed from '../data/seed.json';
+import { BrandStore } from '../core/brand.store';
 
 @Component({
   selector: 'app-portal',
@@ -10,13 +10,22 @@ import seed from '../data/seed.json';
   templateUrl: './portal.html',
   styleUrl: './portal.scss',
 })
-export class Portal {
-  /** v0.5: el dato viene del seed del repo. En la semana 1 vendrá de Supabase. */
-  readonly brand = signal<Brand>(seed.brand as Brand);
+export class Portal implements OnInit {
+  private readonly store = inject(BrandStore);
 
-  readonly blocks = computed(() =>
-    [...this.brand().blocks].sort((a, b) => a.position - b.position),
-  );
+  readonly brand = this.store.brand;
+  readonly loading = this.store.loading;
+  readonly error = this.store.error;
+
+  readonly blocks = computed(() => {
+    const brand = this.brand();
+    if (!brand) return [];
+    return [...brand.blocks].sort((a, b) => a.position - b.position);
+  });
+
+  ngOnInit(): void {
+    void this.store.load();
+  }
 
   /** Un bloque sin componente registrado simplemente no se pinta. */
   componentFor(type: BlockType) {
