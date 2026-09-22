@@ -15,6 +15,13 @@ export class BrandStore {
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
 
+  /** Al cerrar sesión: que no quede nada de la marca anterior en memoria. */
+  reset(): void {
+    this.brand.set(null);
+    this.error.set(null);
+    this.loading.set(false);
+  }
+
   async load(): Promise<void> {
     this.loading.set(true);
     this.error.set(null);
