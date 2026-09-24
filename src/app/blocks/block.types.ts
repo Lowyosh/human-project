@@ -120,6 +120,21 @@ export interface IconPackPayload {
   items: IconAsset[];
 }
 
+export interface DownloadKit {
+  name: string;
+  key: string;
+  /** Qué lleva dentro: es lo que evita que la imprenta descargue el ZIP que no es. */
+  contents?: string[];
+  format?: string;
+  /** Peso en texto, tal y como lo ve quien descarga: "2,4 MB". */
+  size?: string;
+}
+
+export interface DownloadsPayload {
+  note?: string;
+  kits: DownloadKit[];
+}
+
 export interface HeroPayload {
   tagline?: string;
   intro?: string;

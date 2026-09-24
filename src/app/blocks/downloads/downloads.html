@@ -1,0 +1,42 @@
+<section class="downloads">
+  <h2 class="downloads__title">Descargas</h2>
+
+  @if (payload().note) {
+    <p class="downloads__note">{{ payload().note }}</p>
+  }
+
+  @if (error()) {
+    <p class="downloads__error">{{ error() }}</p>
+  }
+
+  <ul class="downloads__list">
+    @for (kit of payload().kits; track kit.key) {
+      <li class="kit">
+        <div class="kit__info">
+          <p class="kit__name">{{ kit.name }}</p>
+
+          @if (kit.contents?.length) {
+            <ul class="kit__contents">
+              @for (item of kit.contents; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          }
+
+          <p class="kit__meta">
+            @if (kit.format) {
+              {{ kit.format }}
+            }
+            @if (kit.size) {
+              · {{ kit.size }}
+            }
+          </p>
+        </div>
+
+        <button type="button" [disabled]="pending() === kit.key" (click)="download(kit)">
+          {{ pending() === kit.key ? 'Preparando…' : 'Descargar' }}
+        </button>
+      </li>
+    }
+  </ul>
+</section>

@@ -1,5 +1,6 @@
 import { Type } from '@angular/core';
 import { BlockType } from './block.types';
+import { Downloads } from './downloads/downloads';
 import { Hero } from './hero/hero';
 import { IconPack } from './icon-pack/icon-pack';
 import { LogoVariants } from './logo-variants/logo-variants';
@@ -16,4 +17,5 @@ export const REGISTRY: Partial<Record<BlockType, Type<unknown>>> = {
   'logo-variants': LogoVariants,
   typography: Typography,
   'icon-pack': IconPack,
+  downloads: Downloads,
 };
