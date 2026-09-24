@@ -1,0 +1,33 @@
+// Mínimo para ver el bloque. El diseño es tuyo.
+
+.hero {
+  padding: 2rem 0;
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 2.5rem;
+  }
+
+  &__tagline {
+    margin: 0.5rem 0 0;
+    font-size: 1.25rem;
+  }
+
+  &__intro {
+    margin: 1rem 0 0;
+    max-width: 60ch;
+  }
+
+  &__year {
+    margin: 1rem 0 0;
+    opacity: 0.6;
+  }
+}

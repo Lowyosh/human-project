@@ -1,0 +1,38 @@
+<section class="icons">
+  <h2 class="icons__title">Favicon y avatar</h2>
+
+  @if (payload().note) {
+    <p class="icons__note">{{ payload().note }}</p>
+  }
+
+  @if (error()) {
+    <p class="icons__error">{{ error() }}</p>
+  }
+
+  <ul class="icons__list">
+    @for (item of payload().items; track item.key) {
+      <li class="icon">
+        <div class="icon__previews">
+          @if (previews()[item.key]; as url) {
+            <img class="icon__square" [src]="url" [alt]="item.label" />
+            <img class="icon__circle" [src]="url" [alt]="item.label" />
+          } @else {
+            <span class="icon__loading">…</span>
+          }
+        </div>
+
+        <p class="icon__label">{{ item.label }}</p>
+        <p class="icon__meta">
+          @if (item.format) {
+            {{ item.format }}
+          }
+          @if (item.size) {
+            · {{ item.size }}
+          }
+        </p>
+
+        <button type="button" (click)="download(item)">Descargar</button>
+      </li>
+    }
+  </ul>
+</section>

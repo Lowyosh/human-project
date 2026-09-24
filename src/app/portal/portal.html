@@ -5,7 +5,6 @@
     <p class="portal__error">{{ error() }}</p>
   } @else if (brand(); as brand) {
     <header class="portal__header">
-      <h1>{{ brand.name }}</h1>
       <button type="button" class="portal__signout" (click)="signOut()">Cerrar sesión</button>
     </header>
 

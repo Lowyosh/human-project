@@ -3,12 +3,30 @@
   "name": "human-project",
   "compatibility_date": "2026-09-18",
 
-  // Sin "main": no hay Worker todavía, solo archivos estáticos.
-  // El Worker llegará en la semana 2, para firmar las URLs de R2.
+  // El Worker. Solo se ejecuta en /api/*; el resto son archivos estáticos.
+  "main": "./worker/index.ts",
+
   "assets": {
     "directory": "./dist/human-project/browser",
     // Si la ruta no existe como archivo, devuelve index.html
     // y deja que el router de Angular decida.
-    "not_found_handling": "single-page-application"
+    "not_found_handling": "single-page-application",
+    // Excepción: estas rutas van al Worker antes de mirar los archivos.
+    // Sin esto, /api/* devolvería index.html y el Worker nunca correría.
+    "run_worker_first": ["/api/*"]
+  },
+
+  // El binding del bucket: dentro del Worker es env.ASSETS_BUCKET.
+  "r2_buckets": [
+    {
+      "binding": "ASSETS_BUCKET",
+      "bucket_name": "human-assets"
+    }
+  ],
+
+  // Variables no secretas. La clave publishable ya está en el frontend.
+  "vars": {
+    "SUPABASE_URL": "https://xhqdjmnuvloyqnrcorao.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_CRILkvvjnY4dDXyCskQQYg_NyIC_nUi"
   }
 }

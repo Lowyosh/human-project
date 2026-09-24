@@ -1,0 +1,78 @@
+// Mínimo para ver el bloque funcionando. El diseño es tuyo.
+
+.logos {
+  padding: 2rem 0;
+
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+  }
+
+  &__colors {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__color {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: 1px solid rgb(0 0 0 / 0.15);
+    cursor: pointer;
+    padding: 0;
+
+    &.is-selected {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+
+    &.is-dark .logo__preview {
+      background: #1c1d1f;
+    }
+  }
+}
+
+.logo {
+  &__preview {
+    display: grid;
+    place-items: center;
+    min-height: 160px;
+    padding: 1.5rem;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-radius: 6px;
+    background: #fff;
+
+    // El SVG entra por [innerHTML], así que los estilos del componente no le
+    // llegan solos: ::ng-deep los deja pasar.
+    ::ng-deep svg {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  &__name {
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+}

@@ -57,3 +57,72 @@ export interface PaletteColor {
 export interface PalettePayload {
   colors: PaletteColor[];
 }
+
+/** Los tres tipos de logo. El color no se guarda: lo elige quien descarga. */
+export type LogoVariantType = 'isotipo' | 'imagotipo' | 'logotipo';
+
+export interface LogoVariant {
+  type: LogoVariantType;
+  /** Ruta del archivo en R2, nunca una URL: las URLs cambian, la key no. */
+  key: string;
+  name?: string;
+}
+
+export interface LogoVariantsPayload {
+  variants: LogoVariant[];
+}
+
+
+/**
+ * De dónde viene la fuente. Es una restricción de licencia, no una preferencia:
+ * `licensed` solo permite enseñar el nombre y enlazar al foundry, porque no
+ * podemos redistribuir una fuente comercial. Ver CLAUDE.md → Trampas conocidas.
+ */
+export type FontOrigin = 'google' | 'licensed' | 'custom';
+
+export interface FontWeight {
+  /** 400, 600, 800… el número que va en CSS. */
+  value: number;
+  name: string;
+  usage?: string;
+}
+
+export interface FontFamily {
+  name: string;
+  origin: FontOrigin;
+  /** Enlace al specimen o al foundry. Obligatorio de facto si es `licensed`. */
+  url?: string;
+  /** Para qué sirve esta familia: titulares, textos… */
+  role?: string;
+  /** Explicación en la voz de la marca. */
+  note?: string;
+  weights: FontWeight[];
+  /** En em, que es lo que se pega en el CSS: "-0.04em" son -4%. */
+  letterSpacing?: string;
+  lineHeight?: string;
+}
+
+export interface TypographyPayload {
+  intro?: string;
+  families: FontFamily[];
+}
+
+export interface IconAsset {
+  key: string;
+  label: string;
+  /** Informativos, para que el dev sepa qué se lleva: "ICO", "512×512". */
+  format?: string;
+  size?: string;
+}
+
+export interface IconPackPayload {
+  note?: string;
+  items: IconAsset[];
+}
+
+export interface HeroPayload {
+  tagline?: string;
+  intro?: string;
+  year?: number;
+  imageKey?: string;
+}

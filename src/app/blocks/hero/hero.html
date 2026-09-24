@@ -1,0 +1,25 @@
+<section class="hero">
+  @if (imageUrl(); as url) {
+    <img class="hero__image" [src]="url" [alt]="brandName()" />
+  }
+
+  <div class="hero__text">
+    <h1 class="hero__name">{{ brandName() }}</h1>
+
+    @if (payload().tagline) {
+      <p class="hero__tagline">{{ payload().tagline }}</p>
+    }
+
+    @if (payload().intro) {
+      <p class="hero__intro">{{ payload().intro }}</p>
+    }
+
+    @if (payload().year) {
+      <p class="hero__year">{{ payload().year }}</p>
+    }
+  </div>
+
+  @if (error()) {
+    <p class="hero__error">{{ error() }}</p>
+  }
+</section>

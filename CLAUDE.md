@@ -238,6 +238,12 @@ autoguiado, panel de organizaciones, soporte, landing comercial.
 
 Cosas que ya nos han mordido en la fase de diseño y que no hay que redescubrir:
 
+- **Los logos se suben monocromo en negro, y el color lo elige quien descarga.** El portal
+  recolorea el SVG en el navegador, así que el color no es un dato del logo y no se guarda:
+  una variante = tipo (iso/imago/logo) + `key` del archivo. La sustitución afecta **solo al
+  negro** (`black`, `#000`, `#000000`): el `fill="white"` que llevan dentro los `<mask>` y
+  el `fill="none"` del elemento raíz son estructura, no color, y tocarlos rompe el logo.
+  Misma lógica servirá para exportar PNG con `canvas`, también en el navegador, sin pipeline.
 - **CMYK y Pantone no son derivables.** HEX↔OKLCH↔RGB es matemática pura, adelante. HEX→CMYK
   depende del perfil ICC, del papel y de la imprenta; HEX→Pantone además tiene tema de
   licencia. Ambos son **campos manuales autoritativos** que rellena el diseñador. El modelo

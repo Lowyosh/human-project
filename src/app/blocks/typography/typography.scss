@@ -1,0 +1,88 @@
+// Mínimo para ver el bloque. El diseño es tuyo.
+
+.type {
+  padding: 2rem 0;
+
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+  }
+
+  &__intro {
+    max-width: 60ch;
+    margin: 0 0 2rem;
+  }
+}
+
+.family {
+  border-top: 1px solid rgb(0 0 0 / 0.12);
+  padding: 1.5rem 0;
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 1.75rem;
+  }
+
+  &__role,
+  &__note {
+    margin: 0.25rem 0 0;
+    opacity: 0.6;
+  }
+
+  &__note {
+    max-width: 60ch;
+    opacity: 1;
+  }
+
+  &__license {
+    font-size: 0.875rem;
+    opacity: 0.7;
+  }
+
+  &__weights {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  &__specs {
+    display: flex;
+    gap: 0.5rem 1.5rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0 0;
+    font-size: 0.875rem;
+
+    dt {
+      opacity: 0.6;
+    }
+
+    dd {
+      margin: 0 1rem 0 0;
+    }
+  }
+}
+
+.weight {
+  &__specimen {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  &__meta {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    opacity: 0.6;
+  }
+}

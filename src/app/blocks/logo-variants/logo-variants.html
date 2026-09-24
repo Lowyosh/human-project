@@ -1,0 +1,39 @@
+<section class="logos">
+  <h2 class="logos__title">Logo Mark</h2>
+
+  @if (error()) {
+    <p class="logos__error">{{ error() }}</p>
+  }
+
+  <div class="logos__colors">
+    @for (color of colors(); track color.hex) {
+      <button
+        type="button"
+        class="logos__color"
+        [class.is-selected]="selected() === color.hex"
+        [style.background-color]="color.hex"
+        [title]="color.name"
+        (click)="selected.set(color.hex)"
+      ></button>
+    }
+  </div>
+
+  <ul class="logos__list" [class.is-dark]="darkPreview()">
+    @for (variant of variants(); track variant.key) {
+      <li class="logo">
+        <div class="logo__preview">
+          @if (variant.svg) {
+            <div [innerHTML]="variant.svg"></div>
+          } @else {
+            <span class="logo__loading">Cargando…</span>
+          }
+        </div>
+
+        <div class="logo__footer">
+          <span class="logo__name">{{ variant.name ?? variant.type }}</span>
+          <button type="button" (click)="download(variant)">Descargar SVG</button>
+        </div>
+      </li>
+    }
+  </ul>
+</section>

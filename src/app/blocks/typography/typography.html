@@ -1,0 +1,69 @@
+<section class="type">
+  <h2 class="type__title">Tipografía</h2>
+
+  @if (payload().intro) {
+    <p class="type__intro">{{ payload().intro }}</p>
+  }
+
+  @for (family of payload().families; track family.name) {
+    <article class="family">
+      <header class="family__header">
+        <div>
+          <h3 class="family__name" [style.font-family]="family.name">{{ family.name }}</h3>
+          @if (family.role) {
+            <p class="family__role">{{ family.role }}</p>
+          }
+        </div>
+
+        <button type="button" (click)="copy(family)">
+          {{ copied() === family.name ? 'Copiado' : 'Copiar CSS' }}
+        </button>
+      </header>
+
+      @if (family.note) {
+        <p class="family__note">{{ family.note }}</p>
+      }
+
+      <!-- Solo las de Google se pueden servir. Una licenciada se enlaza. -->
+      @if (family.origin !== 'google' && family.url) {
+        <p class="family__license">
+          Esta fuente no se distribuye desde aquí.
+          <a [href]="family.url" target="_blank" rel="noopener">Consíguela en el foundry</a>
+        </p>
+      }
+
+      <ul class="family__weights">
+        @for (weight of family.weights; track weight.value) {
+          <li class="weight">
+            <p
+              class="weight__specimen"
+              [style.font-family]="family.name"
+              [style.font-weight]="weight.value"
+              [style.letter-spacing]="family.letterSpacing"
+              [style.line-height]="family.lineHeight"
+            >
+              {{ pangram }}
+            </p>
+            <p class="weight__meta">
+              {{ weight.name }} · {{ weight.value }}
+              @if (weight.usage) {
+                · {{ weight.usage }}
+              }
+            </p>
+          </li>
+        }
+      </ul>
+
+      <dl class="family__specs">
+        @if (family.letterSpacing) {
+          <dt>Tracking</dt>
+          <dd>{{ family.letterSpacing }}</dd>
+        }
+        @if (family.lineHeight) {
+          <dt>Interlineado</dt>
+          <dd>{{ family.lineHeight }}</dd>
+        }
+      </dl>
+    </article>
+  }
+</section>
