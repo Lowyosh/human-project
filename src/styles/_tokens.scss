@@ -1,0 +1,47 @@
+//
+// Variables CSS, no de Sass, porque se pueden cambiar en runtime: es lo que
+// permitirá inyectar el color de cada marca cuando retomemos el theming.
+//
+
+:root {
+  // Color
+
+  --ui-paper: #F9F7F4;
+  --ui-ink: #0F1113;
+  --ui-muted: rgb(17 17 17 / 0.6);
+  --ui-line: rgb(17 17 17 / 0.12);
+
+  --brand-accent: var(--ui-ink); // valor de reserva hasta que haya theming
+
+  // Espaciado
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 5rem;
+
+  // Tipografía
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque', var(--font-body);
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+
+  --tracking-tight: -0.02em;
+  --tracking-display: -0.04em;
+  --leading-body: 1.5;
+  --leading-display: 1.1;
+
+  // Formas 
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-xl: 28px;
+  --radius-full: 150px;
+
+}

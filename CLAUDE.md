@@ -95,6 +95,22 @@ decidido en runtime sin un `switch` gigante en la plantilla.
 Añadir un bloque nuevo = una entrada en el mapa + un componente. El primero cuesta
 semanas, el sexto cuesta horas. Esa es toda la apuesta del diseño.
 
+### Assets privados
+
+Los archivos viven en un bucket R2 **sin acceso público**. Los sirve el Worker, que no
+lleva claves de la base de datos: recibe el token de sesión del navegador, le pregunta a
+Supabase por la marca **con ese token** y deja que responda RLS. Las reglas de acceso
+siguen existiendo en un solo sitio.
+
+Convención de keys: `brands/<brand_id>/<lo-que-sea>`. El `brand_id` va en la propia ruta,
+y por eso se puede comprobar el permiso sin consultar nada más.
+
+En el payload se guarda la **key**, nunca una URL: las URLs cambian de dominio o caducan,
+la key no. El frontend las pide con `AssetService`, que añade el token y cachea por key.
+
+Consecuencia práctica: un asset no se puede poner en un `<img src>` sin más, porque hace
+falta la cabecera de autorización. Se descarga como blob y se pinta desde ahí.
+
 ### Dato vs presentación
 
 **Regla:** se guarda *qué es*, no *cómo se ve*.
@@ -189,6 +205,20 @@ comerse la propia comida.
 
 Primer commit: walking skeleton. Una página que renderiza un `PaletteBlockComponent`
 desde un JSON hardcodeado, desplegada. Un día. No abrir el repo con el schema.
+
+**Estado a 25/09/2026: los seis bloques están hechos y la marca del estudio, publicada.**
+Cambios respecto al plan, por si alguien lee solo la tabla:
+
+- El JSON seed duró un día. Los datos salen de Supabase desde la semana 1, y el seed se
+  borró: mantener dos fuentes no aportaba nada.
+- Los assets no son públicos. R2 privado + Worker, como explica *Assets privados*.
+- `logo-variants` no guarda colores: los SVG se suben monocromo y el portal los recolorea.
+- `downloads` es un bloque, no un footer fijo: las keys de los ZIP son dato de cada marca
+  y hay marcas que no tendrán kits. Que se vea como una franja al final es solo CSS.
+- El theming de marca quedó aparcado a propósito, hasta decidir el diseño de los bloques.
+
+Sin hacer todavía: validación con Zod de los payloads (hoy se confía en lo que hay en la
+base de datos) y el diseño de los bloques, que están con estilos mínimos.
 
 ### Después
 

@@ -1,0 +1,27 @@
+
+
+:root {
+  --duration-fast: 150ms;
+  --duration-slow: 500ms;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);   // para appear
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --reveal-shift: 12px; // cuánto sube un bloque al aparecer
+}
+
+// Estado inicial y final de una entrada. La clase `is-visible` la pone la
+// directiva appReveal cuando el bloque entra en pantalla.
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift));
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+

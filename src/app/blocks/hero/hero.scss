@@ -1,33 +1,82 @@
-// Mínimo para ver el bloque. El diseño es tuyo.
+// Marco a sangre con aire por los cuatro lados: la imagen ocupa casi toda la
+// ventana pero nunca la toca. El logo va centrado y el texto abajo a la izquierda.
 
 .hero {
-  padding: 2rem 0;
+  &__frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background: var(--ui-line); // color de espera mientras carga la imagen
 
-  &__image {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
+    // Alto de la pieza. Se queda por debajo del alto de ventana para que se
+    // intuya que hay más contenido al hacer scroll.
+    min-height: min(82vh, 760px);
+    display: grid;
+    place-items: center;
   }
 
-  &__name {
-    margin: 0;
-    font-size: 2.5rem;
+  &__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__logo {
+    position: relative; // por encima de la imagen
+    width: min(46%, 520px);
+
+    ::ng-deep svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  &__text {
+    position: absolute;
+    left: var(--space-5);
+    right: var(--space-5);
+    bottom: var(--space-5);
+    max-width: 52ch;
+    color: var(--ui-paper);
+    // Si sobre alguna imagen no se lee, aquí es donde entra el degradado o la
+    // sombra. Se decide con la imagen delante, no antes.
   }
 
   &__tagline {
-    margin: 0.5rem 0 0;
-    font-size: 1.25rem;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    letter-spacing: var(--tracking-display);
   }
 
   &__intro {
-    margin: 1rem 0 0;
-    max-width: 60ch;
+    margin: var(--space-2) 0 0;
   }
 
   &__year {
-    margin: 1rem 0 0;
-    opacity: 0.6;
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-sm);
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    &__frame {
+      min-height: 70vh;
+    }
+
+    &__logo {
+      width: 62%;
+    }
+
+    &__text {
+      left: var(--space-3);
+      right: var(--space-3);
+      bottom: var(--space-3);
+    }
   }
 }

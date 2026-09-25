@@ -1,22 +1,26 @@
 <section class="hero">
-  @if (imageUrl(); as url) {
-    <img class="hero__image" [src]="url" [alt]="brandName()" />
-  }
-
-  <div class="hero__text">
-    <h1 class="hero__name">{{ brandName() }}</h1>
-
-    @if (payload().tagline) {
-      <p class="hero__tagline">{{ payload().tagline }}</p>
+  <div class="hero__frame">
+    @if (imageUrl(); as url) {
+      <img class="hero__image" [src]="url" alt="" />
     }
 
-    @if (payload().intro) {
-      <p class="hero__intro">{{ payload().intro }}</p>
+    @if (logo(); as svg) {
+      <div class="hero__logo" [innerHTML]="svg" [attr.aria-label]="brandName()" role="img"></div>
     }
 
-    @if (payload().year) {
-      <p class="hero__year">{{ payload().year }}</p>
-    }
+    <div class="hero__text">
+      @if (payload().tagline) {
+        <p class="hero__tagline">{{ payload().tagline }}</p>
+      }
+
+      @if (payload().intro) {
+        <p class="hero__intro">{{ payload().intro }}</p>
+      }
+
+      @if (payload().year) {
+        <p class="hero__year">{{ payload().year }}</p>
+      }
+    </div>
   </div>
 
   @if (error()) {
